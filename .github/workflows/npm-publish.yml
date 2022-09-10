@@ -17,7 +17,6 @@ jobs:
           node-version: 16
       - run: npm ci
       - run: npx nx run-many --all --target=test
-      - run: npx nx run-many --all --target=build
 
   publish-npm:
     needs: build
@@ -29,6 +28,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npx nx run-many --all --target=build
       - run: cd dist/packages/demo-lib
       - run: npm publish --access public
         env:
