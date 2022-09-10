@@ -1,0 +1,33 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@desojs/demo-lib/demo-lib/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@desojs/demo-lib/demo-lib",
+        "main": "packages/@desojs/demo-lib/demo-lib/src/index.ts",
+        "tsConfig": "packages/@desojs/demo-lib/demo-lib/tsconfig.lib.json",
+        "assets": ["packages/@desojs/demo-lib/demo-lib/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/@desojs/demo-lib/demo-lib/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/@desojs/demo-lib/demo-lib"],
+      "options": {
+        "jestConfig": "packages/@desojs/demo-lib/demo-lib/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
