@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@desojs/demo-lib": ["packages/@desojs/demo-lib/demo-lib/src/index.ts"]
+      "@desojs/demo-lib": ["packages/demo-lib/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

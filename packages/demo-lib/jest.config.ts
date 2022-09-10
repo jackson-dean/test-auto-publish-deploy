@@ -1,7 +1,7 @@
 /* eslint-disable */
 export default {
-  displayName: '@desojs-demo-lib-demo-lib',
-  preset: '../../../../jest.preset.js',
+  displayName: 'demo-lib',
+  preset: '../../jest.preset.js',
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/packages/@desojs/demo-lib/demo-lib',
+  coverageDirectory: '../../coverage/packages/demo-lib',
 };
