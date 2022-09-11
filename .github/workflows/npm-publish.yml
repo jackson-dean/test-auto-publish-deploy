@@ -31,4 +31,5 @@ jobs:
       - run: npx nx run-many --all --target=build
       - run: cd dist/packages/demo-lib
       - run: npm config set _authToken=${{secrets.npm_token}}
+      - run: npm version `git tag | tail -1`
       - run: npm publish --access public
