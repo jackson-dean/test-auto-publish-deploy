@@ -8,18 +8,7 @@ on:
     types: [created]
 
 jobs:
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: 16
-  #     - run: npm ci
-  #     - run: npx nx run-many --all --target=test
-
   publish-npm:
-    # needs: build
     runs-on: ubuntu-latest
     env:
       NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
@@ -32,11 +21,10 @@ jobs:
           scope: '@desojs'
       - run: |
           npm ci
-          npx nx run-many --all --target=build
+          npx nx run demo-lib:build
           cd dist/packages/demo-lib
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           NPM_VERSION=$(git describe --tags --abbrev=0)
           npm version $NPM_VERSION
-          npm config list
           npm publish --access public
