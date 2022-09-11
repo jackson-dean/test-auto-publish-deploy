@@ -31,6 +31,7 @@ jobs:
       - run: |
           npm ci
           npx nx run-many --all --target=build
+          cp .npmrc dist/packages/demo-lib
           cd dist/packages/demo-lib
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
