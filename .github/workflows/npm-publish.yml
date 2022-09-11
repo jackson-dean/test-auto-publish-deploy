@@ -8,15 +8,15 @@ on:
     types: [created]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm ci
-      - run: npx nx run-many --all --target=test
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #     - run: npm ci
+  #     - run: npx nx run-many --all --target=test
 
   publish-npm:
     needs: build
@@ -34,7 +34,7 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
       # - run: npm config set _authToken="$NODE_AUTH_TOKEN"
-      - run: npm version `git tag | tail -1`
+      - run: npm version `git describe --tags --abbrev=0`
       - run: npm publish --access public
     env:
       NODE_AUTH_TOKEN: ${{secrets.npm_token}}
