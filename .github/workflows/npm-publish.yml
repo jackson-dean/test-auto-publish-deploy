@@ -25,17 +25,18 @@ jobs:
       NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
     steps:
       - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: 16
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@desojs'
       - run: |
           npm ci
           npx nx run-many --all --target=build
           cd dist/packages/demo-lib
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          npm config set @desojs:registry=https://registry.npmjs.org
-          npm config set //https://registry.npmjs.org/:_authToken="$NODE_AUTH_TOKEN"
-          npm config set always-auth=true
           NPM_VERSION=$(git describe --tags --abbrev=0)
           npm version $NPM_VERSION
+          npm config list
           npm publish --access public
