@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          registry-url: https://registry.npmjs.org/
+          registry-url: https://registry.npmjs.org
           scope: '@desojs'
       - run: |
           npm ci
@@ -36,6 +36,7 @@ jobs:
           git config user.email "<>"
           NPM_VERSION=$(git describe --tags --abbrev=0)
           npm version $NPM_VERSION
+          cat .npmrc
           npm publish --access public
       # - run: npm config set _authToken="$NODE_AUTH_TOKEN"
       # - run: npm version $NPM_VERSION
