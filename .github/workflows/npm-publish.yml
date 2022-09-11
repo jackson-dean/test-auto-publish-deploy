@@ -3,9 +3,13 @@
 
 name: Node.js Package
 
+# on:
+#   release:
+#     types: [created]
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
   # build:
@@ -20,22 +24,13 @@ jobs:
 
   publish-npm:
     # needs: build
-    runs-on: ubuntu-latest
     env:
-      NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           node-version: 16
       - run: |
-          npm ci
-          npx nx run-many --all --target=build
-          cd dist/packages/demo-lib
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
-          npm config set @desojs:registry=https://registry.npmjs.org
-          npm config set //https://registry.npmjs.org/:_authToken="$NODE_AUTH_TOKEN"
-          npm config set always-auth=true
-          NPM_VERSION=$(git describe --tags --abbrev=0)
-          npm version $NPM_VERSION
-          npm publish --access public
+          echo $NODE_AUTH_TOKEN
+          echo where is the output...
