@@ -31,11 +31,15 @@ jobs:
           npm ci
           npx nx run-many --all --target=build
           cd dist/packages/demo-lib
+          cat package.json
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           NPM_VERSION=$(git describe --tags --abbrev=0)
+          echo 'Publishing new version $NPM_VERSION'
+          npm version $NPM_VERSION
+          npm publish --access public
       # - run: npm config set _authToken="$NODE_AUTH_TOKEN"
-      - run: npm version $NPM_VERSION
-      - run: npm publish --access public
+      # - run: npm version $NPM_VERSION
+      # - run: npm publish --access public
     env:
       NODE_AUTH_TOKEN: ${{secrets.npm_token}}
