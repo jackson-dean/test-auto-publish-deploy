@@ -33,5 +33,5 @@ jobs:
       - run: npm config set _authToken=$NODE_AUTH_TOKEN
       - run: npm version `git -c user.name='Bot' -c user.email='<>' tag | tail -1`
       - run: npm publish --access public
-      - env:
+      env:
         NODE_AUTH_TOKEN: ${{secrets.npm_token}}
