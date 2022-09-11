@@ -33,8 +33,9 @@ jobs:
           cd dist/packages/demo-lib
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
+          NPM_VERSION=$(git describe --tags --abbrev=0)
       # - run: npm config set _authToken="$NODE_AUTH_TOKEN"
-      - run: npm version `git describe --tags --abbrev=0`
+      - run: npm version $NPM_VERSION
       - run: npm publish --access public
     env:
       NODE_AUTH_TOKEN: ${{secrets.npm_token}}
