@@ -27,11 +27,14 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npx nx run-many --all --target=build
-      - run: cd dist/packages/demo-lib
-      - run: npm config set _authToken="$NODE_AUTH_TOKEN"
-      - run: npm version `git -c user.name='Bot' -c user.email='<>' tag | tail -1`
+      - run: |
+          npm ci
+          npx nx run-many --all --target=build
+          cd dist/packages/demo-lib
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+      # - run: npm config set _authToken="$NODE_AUTH_TOKEN"
+      - run: npm version `git tag | tail -1`
       - run: npm publish --access public
     env:
       NODE_AUTH_TOKEN: ${{secrets.npm_token}}
