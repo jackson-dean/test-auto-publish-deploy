@@ -30,6 +30,5 @@ jobs:
       - run: npm ci
       - run: npx nx run-many --all --target=build
       - run: cd dist/packages/demo-lib
+      - run: npm config set _authToken=${{secrets.npm_token}}
       - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
